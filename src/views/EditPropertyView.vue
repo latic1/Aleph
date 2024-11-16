@@ -45,37 +45,19 @@
             required
           ></textarea>
         </div>
-       <div class="sm:col-span-3">
-  <label for="file-upload" class="block text-sm font-medium">Property Image</label>
-  <input
-    type="file"
-    id="file-upload"
-    name="file-upload"
-    @change="handleFileUpload"
-    class="w-full mt-2 p-1 border rounded-md"
-  />
-  <div class="mt-2">
-    <p class="text-sm italic text-gray-500">
-      Current Image:
-    </p>
-    <img
-      v-if="!newImagePreview"
-      :src="currentImage"
-      alt="Current property image"
-      class="w-full h-auto border rounded-md"
-    />
-    <p v-if="newImagePreview" class="text-sm italic text-gray-500 mt-2">
-      Preview of new image:
-    </p>
-    <img
-      v-if="newImagePreview"
-      :src="newImagePreview"
-      alt="Preview of uploaded image"
-      class="w-full h-auto border rounded-md"
-    />
-  </div>
-</div>
-
+     
+        <div class="sm:col-span-3">
+          <label for="file-upload" class="block text-sm font-medium"
+            >Change Image</label
+          >
+          <input
+            type="file"
+            id="file-upload"
+            name="file-upload"
+            @change="handleFileUpload"
+            class="w-full mt-2 p-1 border rounded-md"
+          />
+        </div>
 
         <!-- Property Type -->
         <div class="sm:col-span-3">
@@ -156,8 +138,6 @@ const property = ref({
   type: "",
 });
 
-const currentImage = ref<string>("");
-
 // Handle file uploads
 const handleFileUpload = (event: Event) => {
   const files = (event.target as HTMLInputElement).files;
@@ -176,11 +156,11 @@ const propertyId = route.params.id as string;
 onMounted(async () => {
   const propertyId = route.params.id as string;
 
+
   // Fetch property from store or API
   const fetchedProperty = propertiesStore.getPropertyById(propertyId);
   if (fetchedProperty) {
     Object.assign(property.value, fetchedProperty);
-    currentImage.value = fetchedProperty.image_url;
   }
 
   isLoading.value = false;

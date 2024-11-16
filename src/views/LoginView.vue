@@ -13,7 +13,7 @@
       <div class="overflow-hidden bg-white rounded-md shadow-md">
         <div class="px-4 py-6 sm:px-8 sm:py-7">
           <div class="flex flex-col items-center justify-center gap-2 mb-8">
-            <a href="https://amethgalarcio.web.app/" target="_blank">
+            <a href="/" target="_blank">
               <img src="@/assets/images/alephlogo.png" class="w-16" />
             </a>
             <p class="m-0 text-2xl font-bold text-gray-900">

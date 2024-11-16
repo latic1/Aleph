@@ -13,6 +13,8 @@
     <div class="w-full">
       <SearchBar />
     </div>
+
+    <RouterLink :to="{ name: 'dashboard' }">dashboard</RouterLink>
   </nav>
 </template>
 

@@ -1,7 +1,9 @@
 
 export interface PropertiesProp {
   id: number;
+  discount: string;
   images: string[];
+  tags: string[];
   title: string;
   location: string;
   rating: number;
@@ -27,13 +29,21 @@ export interface PropertiesProp {
 
 
 export interface IProperties {
-  id: number
+  id: string
+  name: string,
   location: string,
   price: string
   image_url: string
   type: string
   description: string
   contact: string
+  reviews: {
+    name: string;
+    image: string;
+    date: string;
+    comment: string;
+    rating: number;
+  }[];
 }
 
 // ====== USER PARAMS

@@ -2,11 +2,10 @@
 import "swiper/css";
 import "swiper/css/pagination";
 import PropertyCard from "./PropertyCard.vue";
-import type { PropertiesProp } from "@/types";
-
+import type { IProperties, PropertiesProp } from "@/types";
 
 defineProps<{
-  properties: Array<PropertiesProp>;
+  properties: Array<IProperties>;
 }>();
 </script>
 

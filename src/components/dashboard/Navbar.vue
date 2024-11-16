@@ -1,53 +1,41 @@
 <template>
-  <div
-    class="flex items-center justify-between h-16 bg-white border-b border-gray-200"
-  >
-    <div class="flex items-center px-4">
-      <button class="text-gray-500 focus:outline-none focus:text-gray-700">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
-      </button>
-      <input
-        class="mx-4 w-full border rounded-md px-4 py-2"
-        type="text"
-        placeholder="Search"
-      />
-    </div>
+  <div class="flex items-center justify-end py-3 h-20 bg-gray-900">
     <div class="flex items-center pr-4">
-      <button
-        class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+      <div className="dropdown dropdown-end">
+        <div
+          tabIndex="{0}"
+          role="button"
+          className="btn btn-ghost btn-circle avatar"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 19l-7-7 7-7m5 14l7-7-7-7"
-          />
-        </svg>
-      </button>
+          <div className="w-10 rounded-full">
+            <img
+              alt="Tailwind CSS Navbar component"
+              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+            />
+          </div>
+        </div>
+        <ul
+          tabIndex="{0}"
+          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+        >
+          <li>
+            <a className="justify-between"> Profile </a>
+          </li>
+          <li><a>Settings</a></li>
+          <li><a @click="logout()">Logout</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useAuthStore } from "@/stores/auth";
+const authStore = useAuthStore();
+
+const logout = async () => {
+  await authStore.handleLogout();
+};
+</script>
 
 <style scoped></style>

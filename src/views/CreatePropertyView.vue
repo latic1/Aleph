@@ -6,7 +6,7 @@
       <!-- Property Title -->
       <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
         <div class="sm:col-span-3">
-          <label for="title" class="block text-gray-700">Title</label>
+          <label for="title" class="block text-sm font-medium">Title</label>
           <input
             v-model="property.name"
             type="text"
@@ -18,7 +18,7 @@
         </div>
 
         <div class="sm:col-span-3">
-          <label for="location" class="block text-gray-700">Location</label>
+          <label for="location" class="block text-sm font-medium">Location</label>
           <input
             v-model="property.location"
             type="text"
@@ -30,10 +30,8 @@
         </div>
 
         <!-- Property Description -->
-        <div class="sm:col-span-3">
-          <label for="description" class="block text-gray-700"
-            >Description</label
-          >
+        <div class="sm:col-span-6">
+          <label for="description" class="block text-sm font-medium">Description</label>
           <textarea
             v-model="property.description"
             id="description"
@@ -44,70 +42,42 @@
           ></textarea>
         </div>
 
-        <!-- Space -->
-        <!-- <div class="sm:col-span-3">
-          <label for="space" class="block text-gray-700">Space</label>
-          <textarea
-            v-model="property.space"
-            id="space"
-            placeholder="Enter property space"
-            class="w-full mt-2 p-2 border rounded-md"
-            rows="6"
-            required
-          ></textarea>
-        </div> -->
-
         <!-- File Upload -->
-        <div class="sm:col-span-3">
-          <label
-            for="cover-photo"
-            class="block text-sm font-medium text-gray-900"
-          >
-            Cover photo
-          </label>
-          <div
-            class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10"
-          >
+        <div class="sm:col-span-6">
+          <label for="cover-photo" class="block text-sm font-medium">Cover Photo</label>
+          <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-300 px-6 py-10">
             <div class="text-center">
-              <svg
-                class="mx-auto h-12 w-12 text-gray-300"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
-              >
+              <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <!-- Icon Path -->
               </svg>
-              <div class="mt-4 flex text-sm text-gray-600">
-                <label
-                  for="file-upload"
-                  class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 hover:text-indigo-500"
-                >
+              <div class="mt-4 flex text-sm">
+                <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 hover:text-indigo-500">
                   <span>Upload a file</span>
                   <input
                     id="file-upload"
                     name="file-upload"
                     type="file"
                     accept="image/*"
-                    multiple
                     @change="handleFileUpload"
                     class="sr-only"
                   />
                 </label>
                 <p class="pl-1">or drag and drop</p>
               </div>
-              <p class="text-xs text-gray-600">PNG, JPG, GIF up to 10MB</p>
+              <p class="text-xs">PNG, JPG, GIF up to 10MB</p>
             </div>
           </div>
         </div>
 
-        <!-- Multi-Select -->
+        <!-- Property Type -->
         <div class="sm:col-span-3">
-          <select name="type" v-model="property.type" id="type-select">
-            <option
-              v-for="type in propertyTypes"
-              :key="type.value"
-              :value="type.value"
-            >
+          <label for="type-select" class="block text-sm font-medium">Property Type</label>
+          <select
+            v-model="property.type"
+            id="type-select"
+            class="w-full mt-2 p-2 border rounded-md"
+          >
+            <option v-for="type in propertyTypes" :key="type.value" :value="type.value">
               {{ type.label }}
             </option>
           </select>
@@ -115,7 +85,7 @@
 
         <!-- Price -->
         <div class="sm:col-span-3">
-          <label for="price" class="block text-gray-700">Price</label>
+          <label for="price" class="block text-sm font-medium">Price</label>
           <input
             v-model="property.price"
             type="number"
@@ -126,14 +96,14 @@
           />
         </div>
 
-        <!-- Discount -->
+        <!-- Contact -->
         <div class="sm:col-span-3">
-          <label for="discount" class="block text-gray-700">Contact</label>
+          <label for="contact" class="block text-sm font-medium">Contact</label>
           <input
             v-model="property.contact"
             type="text"
             id="contact"
-            placeholder="Enter Contact"
+            placeholder="Enter contact"
             class="w-full mt-2 p-2 border rounded-md"
             required
           />
@@ -141,10 +111,8 @@
       </div>
 
       <!-- Submit Button -->
-      <button
-        type="submit"
-        class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-      >
+      <button type="submit" class="btn btn-primary mt-4">
+        <span v-if="loading" class="loading loading-spinner loading-md"></span>
         Create Property
       </button>
     </form>
@@ -163,9 +131,12 @@ const router = useRouter();
 // Property Options
 const propertyTypes = [
   { label: "Land", value: "land" },
-  { label: "Commercial", value: "Commercial" },
-  { label: "Industrial", value: "Industrial" },
+  { label: "Commercial", value: "commercial" },
+  { label: "Industrial", value: "industrial" },
 ];
+
+const loading = ref(false);
+const setLoading = (state: boolean) => (loading.value = state);
 
 // Property Object
 const property = ref({
@@ -189,11 +160,14 @@ const handleFileUpload = (event: Event) => {
 // Submit Form
 const submitForm = async () => {
   try {
+    setLoading(true);
+
     const formData = new FormData();
     formData.append("name", property.value.name);
     formData.append("location", property.value.location);
     formData.append("description", property.value.description);
-    // Modify the phone_number to remove the leading 0 and add 233
+    
+    // Format contact number
     if (property.value.contact.startsWith("0")) {
       property.value.contact = `233${property.value.contact.slice(1)}`;
     }
@@ -203,21 +177,23 @@ const submitForm = async () => {
     formData.append("upload_type", property.value.type);
 
     // Add images to FormData
-    property.value.image.forEach((image, index) => {
+    property.value.image.forEach((image) => {
       formData.append("image", image);
     });
 
     // Call the store action to create the property
     await propertyStore.createProperty(formData);
+    setLoading(false);
 
     // Redirect to properties list
     router.push({ name: "properties" });
   } catch (error) {
+    setLoading(false);
     console.error("Error creating property:", error);
   }
 };
 </script>
 
 <style scoped>
-/* Add your custom styles here */
+/* Add any custom styles here */
 </style>

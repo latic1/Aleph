@@ -6,6 +6,7 @@ import DashboardLayout from "@/components/dashboard/DashboardLayout.vue";
 import DashboardView from "@/views/DashboardView.vue";
 import PropertiesView from "@/views/PropertiesView.vue";
 import CreatePropertyView from "@/views/CreatePropertyView.vue";
+import EditPropertyView from "@/views/EditPropertyView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,6 +54,11 @@ const router = createRouter({
           path: "properties/create",
           name: "createProperties",
           component: CreatePropertyView,
+        },
+        {
+          path: "properties/edit/:id",
+          name: "editProperties",
+          component: EditPropertyView,
         },
         {
           path: "offers",

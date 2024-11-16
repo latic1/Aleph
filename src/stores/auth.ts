@@ -84,11 +84,11 @@ export const useAuthStore = defineStore('auth', {
 
         async handleLogout() {
             try {
-                await axiosClient.post('/users/logout');
+
                 this.authUser.user = null;
                 this.authUser.token = null;
-                sessionStorage.removeItem('TOKEN');
-                router.push("/login");
+                localStorage.removeItem('TOKEN');
+                router.push("/auth/login");
             } catch (err) {
                 const error = err as Error | AxiosError;
                 if (axios.isAxiosError(error)) {

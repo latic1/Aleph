@@ -1,6 +1,6 @@
 <template>
-  <div class="hidden md:flex flex-col w-64 bg-gray-800">
-    <div class="flex items-center space-x-3 px-5 h-16 bg-gray-900">
+  <div class="hidden md:flex flex-col w-64 bg-gray-800 ">
+    <div class="flex items-center space-x-3 px-5 h-20 bg-gray-900">
       <RouterLink :to="{ name: 'home' }">
         <img
           src="@/assets/images/alephlogo.png"
@@ -26,30 +26,23 @@
 
           properties
         </RouterLink>
-        <RouterLink
-          :to="{ name: 'offers' }"
-          class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 transition duration-200"
-        >
-          <GifIcon class="h-6 w-6 mr-2" />
 
-          Offers
-        </RouterLink>
-        <a
-          href="#"
+        <RouterLink
+          :to="{ name: '' }"
           class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 transition duration-200"
         >
           <UserGroupIcon class="h-6 w-6 mr-2" />
 
           Users
-        </a>
-        <a
-          href="#"
+        </RouterLink>
+        <RouterLink
+          :to="{ name: '' }"
           class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 transition duration-200"
         >
           <Cog6ToothIcon class="h-6 w-6 mr-2" />
 
           Settings
-        </a>
+        </RouterLink>
       </nav>
     </div>
   </div>

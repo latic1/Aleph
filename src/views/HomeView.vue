@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
 import Hero from "@/components/Hero.vue";
 import Filters from "@/components/Filters.vue";
 import Collections from "@/components/Collections.vue";
@@ -25,14 +25,14 @@ const { properties } = storeToRefs(propertiesStore);
 
 propertiesStore.getProperties();
 
-// Extract unique tags from properties dynamically
-const filters = computed(() => {
-  const tags = properties.value.flatMap((property) => property.tags);
-  return ["All", ...new Set(tags)];
-});
-
 const selectedFilter = ref<string>("All");
 const selectedSortValue = ref<string>("lo");
+
+// Extract unique tags from properties dynamically
+const filters = computed(() => {
+  const locations = properties.value.flatMap((property) => property.location);
+  return ["All", ...new Set(locations)];
+});
 
 // Filter properties based on the selected filter
 const filteredProperties = computed(() => {
@@ -40,7 +40,7 @@ const filteredProperties = computed(() => {
     return properties.value;
   }
   return properties.value.filter((property) =>
-    property.tags.includes(selectedFilter.value)
+    property.location.includes(selectedFilter.value)
   );
 });
 
@@ -48,9 +48,9 @@ const filteredProperties = computed(() => {
 const sortedProperties = computed(() => {
   const sorted = [...filteredProperties.value];
   if (selectedSortValue.value === "highest") {
-    return sorted.sort((a, b) => b.price - a.price);
+    return sorted.sort((a, b) => Number(b.price) - Number(a.price));
   }
-  return sorted.sort((a, b) => a.price - b.price);
+  return sorted.sort((a, b) => Number(a.price) - Number(b.price));
 });
 
 // Methods to update the selected filter and sort value

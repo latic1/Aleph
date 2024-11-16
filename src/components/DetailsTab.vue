@@ -28,27 +28,10 @@
     <div class="w-full border-b">
       <div v-if="activeTab === 0" class="py-2">
         <p class="text-gray-600">{{ property.description }}</p>
-        <div v-if="property.space" class="pt-4">
+        <!-- <div v-if="property.space" class="pt-4">
           <h4 class="font-semibold text-lg">The Space</h4>
           <p class="text-gray-600">{{ property.space }}</p>
-        </div>
-      </div>
-      <div v-if="activeTab === 1" class="py-4">
-        <h4 class="font-semibold text-lg">What this place offers</h4>
-        <p class="text-gray-600 pb-2">
-          Each home is fully equipped to meet your needs, with ample space and
-          privacy.
-        </p>
-        <ul class="list-disc ml-5 text-gray-600">
-          <li
-            v-for="(offer, index) in property.whatWeOffer"
-            :key="index"
-            class="flex items-center"
-          >
-            <img :src="iconMap[offer]" alt="" class="w-5 h-5 mr-2" />
-            {{ offer }}
-          </li>
-        </ul>
+        </div> -->
       </div>
       <div v-if="activeTab === 2" class="py-4">
         <div class="w-full grid grid-cols-1 sm:grid-cols-2">
@@ -80,8 +63,8 @@
 </template>
 
 <script setup lang="ts">
+import type { IProperties } from "@/types";
 import { ref, defineProps } from "vue";
-import type { PropertiesProp } from "@/types";
 
 // Define the mapping of offers to icons
 const iconMap: { [key: string]: string } = {
@@ -95,13 +78,12 @@ const iconMap: { [key: string]: string } = {
 };
 
 const props = defineProps<{
-  property: PropertiesProp;
+  property: IProperties;
 }>();
 
 // Define the tabs
 const tabs = ref([
   { label: "Description" },
-  { label: "What we offer" },
   { label: "Reviews" },
   { label: "About host" },
 ]);

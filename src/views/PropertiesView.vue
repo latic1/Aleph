@@ -171,7 +171,7 @@ let isLoading: boolean;
 // Get properties from store
 onMounted(async () => {
   isLoading = true;
-  propertyStore.getProperties();
+  propertyStore.getProperties({});
   isLoading = false;
 });
 

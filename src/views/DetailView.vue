@@ -78,7 +78,7 @@ onMounted(async () => {
 
   // If property not found, fetch properties from API
   if (!property.value) {
-    await propertiesStore.getProperties();
+    await propertiesStore.getProperties({});
     property.value = propertiesStore.getPropertyById(propertyId) || null;
   }
 

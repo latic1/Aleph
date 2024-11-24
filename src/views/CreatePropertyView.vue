@@ -131,9 +131,11 @@ const router = useRouter();
 // Property Options
 const propertyTypes = [
   { label: "Land", value: "land" },
-  { label: "Commercial", value: "commercial" },
-  { label: "Industrial", value: "industrial" },
+  { label: "House", value: "house" },
+  { label: "Apartment", value: "apartment" },
 ];
+
+
 
 const loading = ref(false);
 const setLoading = (state: boolean) => (loading.value = state);

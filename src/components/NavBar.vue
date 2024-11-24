@@ -14,7 +14,7 @@
       <SearchBar />
     </div>
 
-    <RouterLink :to="{ name: 'dashboard' }">dashboard</RouterLink>
+    <div></div>
   </nav>
 </template>
 

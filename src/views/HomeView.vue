@@ -23,7 +23,7 @@ import { storeToRefs } from "pinia";
 const propertiesStore = usePropertiesStore();
 const { properties } = storeToRefs(propertiesStore);
 
-propertiesStore.getProperties();
+propertiesStore.getProperties({});
 
 const selectedFilter = ref<string>("All");
 const selectedSortValue = ref<string>("lo");

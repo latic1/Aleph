@@ -45,7 +45,7 @@
             required
           ></textarea>
         </div>
-     
+
         <div class="sm:col-span-3">
           <label for="file-upload" class="block text-sm font-medium"
             >Change Image</label
@@ -147,15 +147,14 @@ const handleFileUpload = (event: Event) => {
 };
 
 const propertyTypes = ref([
-  { value: "house", label: "House" },
-  { value: "apartment", label: "Apartment" },
-  { value: "land", label: "Land" },
+  { label: "Land", value: "land" },
+  { label: "House", value: "house" },
+  { label: "Apartment", value: "apartment" },
 ]);
 const propertyId = route.params.id as string;
 
 onMounted(async () => {
   const propertyId = route.params.id as string;
-
 
   // Fetch property from store or API
   const fetchedProperty = propertiesStore.getPropertyById(propertyId);

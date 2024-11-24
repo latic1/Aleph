@@ -1,37 +1,8 @@
 <template>
   <div>
     <!-- Desktop View -->
-    <div class="hidden lg:flex items-center justify-between">
-      <div class="space-x-2">
-        <button
-          v-for="(filter, index) in visibleFilters"
-          :key="index"
-          @click="selectFilter(filter)"
-          :class="{
-            'border-blue-500 text-blue-500 bg-blue-100':
-              filter === selectedFilter,
-            'border-gray-300': filter !== selectedFilter,
-          }"
-          class="py-2 px-4 rounded-full border"
-        >
-          {{ filter }}
-        </button>
-
-        <!-- Show dropdown for more filters -->
-        <button
-          v-if="filters.length > 7"
-          @click="toggleFilters"
-          class="py-2 px-4 rounded-full border inline-flex items-center"
-        >
-          <ChevronDownIcon class="ml-2 w-5 h-5" />
-        </button>
-      </div>
-
+    <div class="hidden lg:flex items-center justify-end">
       <div class="space-x-4 flex">
-        <button class="py-2 px-4 rounded-full border inline-flex items-center">
-          Filter <FunnelIcon class="ml-2 w-5 h-5" />
-        </button>
-
         <!-- Price Sorting Dropdown -->
         <div
           class="py-2 px-4 rounded-full border inline-flex items-center w-full"
@@ -41,7 +12,7 @@
             <select
               id="sort"
               name="sort"
-              class="h-full border-0 bg-transparent bg-none text-gray-900"
+              class="h-full border-0 bg-transparent bg-none"
               v-model="selectedSort"
               @change="selectSortValue(selectedSort)"
             >
@@ -103,7 +74,7 @@
               <select
                 id="sort"
                 name="sort"
-                class="h-full border-0 bg-transparent bg-none text-gray-900 outline-none"
+                class="h-full border-0 bg-transparent bg-none outline-none"
                 v-model="selectedSort"
               >
                 <option value="highest">Highest Price</option>
@@ -118,7 +89,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, watchEffect } from "vue";
+import { ref, computed, watchEffect } from "vue";
 import { ChevronDownIcon, FunnelIcon } from "@heroicons/vue/24/outline";
 
 const props = defineProps<{
@@ -140,21 +111,10 @@ const toggleFilters = () => {
   showMoreFilters.value = !showMoreFilters.value;
 };
 
-// Compute the filters to display (first 7 or all based on the dropdown state)
-const visibleFilters = computed(() => {
-  return showMoreFilters.value || window.innerWidth < 1024
-    ? props.filters
-    : props.filters.slice(0, 7);
-});
-
 // Track if the view is Tablet size
 const isTablet = computed(
   () => window.innerWidth >= 768 && window.innerWidth < 1024
 );
-
-
-const sortProperties = () => {
-};
 </script>
 
 <style scoped>

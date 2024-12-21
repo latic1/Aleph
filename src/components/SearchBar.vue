@@ -14,7 +14,7 @@
     </div>
 
     <!-- Location Input -->
-    <div class="flex flex-col w-full px-2">
+    <div class="md:flex flex-col w-full px-2 hidden">
       <label class="text-sm font-semibold">Location</label>
       <input
         v-model="location"
@@ -25,9 +25,12 @@
     </div>
 
     <!-- Type Dropdown -->
-    <div class="flex flex-col w-full px-2">
+    <div class="md:flex flex-col w-full px-2 hidden">
       <label class="text-sm font-semibold">Type</label>
-      <select v-model="type" class="w-full border-0 focus:outline-none bg-transparent bg-none text-xs">
+      <select
+        v-model="type"
+        class="w-full border-0 focus:outline-none bg-transparent bg-none text-xs"
+      >
         <option value="" disabled selected>Select type</option>
         <option value="house">House</option>
         <option value="apartment">Apartment</option>
@@ -36,7 +39,7 @@
     </div>
 
     <!-- Price Min Input -->
-    <div class="flex flex-col w-full px-2">
+    <div class="md:flex flex-col w-full px-2 hidden">
       <label class="text-sm font-semibold">Min Price</label>
       <input
         v-model="price_min"
@@ -48,7 +51,7 @@
     </div>
 
     <!-- Price Max Input -->
-    <div class="flex flex-col w-full px-2">
+    <div class="md:flex flex-col w-full px-2 hidden">
       <label class="text-sm font-semibold">Max Price</label>
       <input
         v-model="price_max"
